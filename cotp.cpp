@@ -63,7 +63,7 @@ namespace cotp {
 static std::vector<char> hmac(std::vector<char> const& byte_secret, std::vector<char> const& byte_string, const EVP_MD *evp_md)
 {
 	u_char hmac_result[EVP_MAX_MD_SIZE];
-	u_int hmac_size;
+	unsigned int hmac_size;
 
 	bool hmac_success = HMAC(evp_md, byte_secret.data(), byte_secret.size(), (const unsigned char*)byte_string.data(), byte_string.size(), hmac_result, &hmac_size) != nullptr;
 
@@ -101,7 +101,7 @@ std::string to_string(std::vector<char> bytes)
 
 	for(auto const c : bytes)
 	{
-		oss << std::hex << std::setfill('0') << std::setw(2) << std::nouppercase << ((u_int)c&0xff) << " ";
+		oss << std::hex << std::setfill('0') << std::setw(2) << std::nouppercase << ((unsigned int)c&0xff) << " ";
 	}
 
 	return oss.str();
@@ -224,7 +224,7 @@ std::vector<char> OTP::byte_secret() const
 	std::vector<char> out_bytes(m_base32_secret.size() * 5 / 8, 0);
 
 	int n = 5;
-	for (size_t i = 0; ; i++)
+	for (size_t i = 0; i < out_bytes.size() / 5 ; i++)
 	{
 		n = -1;
 		out_bytes[i*5] = 0;

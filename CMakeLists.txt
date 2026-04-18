@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.28.3)
 project(otp)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 11)
 
 add_library(qrcodegen SHARED qrcodegen.cpp)
 target_include_directories(qrcodegen PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
